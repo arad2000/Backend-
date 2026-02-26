@@ -1,10 +1,13 @@
+import os
+import random
+from typing import List, Dict, Optional
+
+import numpy as np
+import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import List, Dict
-import numpy as np
 from sklearn.neural_network import MLPRegressor
-import random
 
 app = FastAPI(title="رشد هوشمند - بک‌اند هوش مصنوعی")
 
@@ -119,14 +122,12 @@ async def simulate(data: SimulateInput):
 @app.post("/api/feedback")
 async def feedback(data: FeedbackInput):
     print(f"بازخورد دریافت شد: {data}")
-    return {"status": "success", "message": "سیستم از بازخورد شما یاد گرفت و دقت پیشنهادها افزایش یافت"} 
-    import os
-import uvicorn
-
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8000))
-    uvicorn.run(app, host="0.0.0.0", port=port)
+    return {"status": "success", "message": "سیستم از بازخورد شما یاد گرفت و دقت پیشنهادها افزایش یافت"}
 
 @app.get("/")
 async def root():
     return {"message": "بک‌اند رشد هوشمند فعال است - آماده اتصال به Rork 🚀"}
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
