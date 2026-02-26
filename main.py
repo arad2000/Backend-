@@ -119,7 +119,13 @@ async def simulate(data: SimulateInput):
 @app.post("/api/feedback")
 async def feedback(data: FeedbackInput):
     print(f"بازخورد دریافت شد: {data}")
-    return {"status": "success", "message": "سیستم از بازخورد شما یاد گرفت و دقت پیشنهادها افزایش یافت"}
+    return {"status": "success", "message": "سیستم از بازخورد شما یاد گرفت و دقت پیشنهادها افزایش یافت"} 
+    import os
+import uvicorn
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
 
 @app.get("/")
 async def root():
